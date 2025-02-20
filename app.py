@@ -9,7 +9,7 @@ VERIFY_TOKEN = "ghp_CTnXUKSDvBE8Ox74ksjRuTtsaO65Oy46p9000"
 
 # Remplace ces valeurs par celles de ton compte WhatsApp Business API
 ACCESS_TOKEN = "EAAIo3XDKfEMBO8h0z3g7Uy9d8oLhZAZBnPS9LD52QxfrAaPSu6Nf6Ntva4mT6ASRzQCIAmcEZCVqYa6xOegancUsxTGAlYwugw8PBZAWxDOsK2MQQEAKZA5rkrX2g8bSbtFSJKvCOXrpnN7QGGvnBeg62obmJKm0J59w5RBG8g7mu7mXGtoJ4ZAOqOU0OaNpXV1ZC3b0lAZD"  # Ton token d'accès à l'API WhatsApp
-PHONE_NUMBER_ID = "533874146483488"  # ID de ton numéro WhatsApp Business
+PHONE_NUMBER_ID = "560506420481398"  # ID de ton numéro WhatsApp Business
 WHATSAPP_API_URL = f"https://graph.facebook.com/v17.0/{PHONE_NUMBER_ID}/messages"
 
 EXTERNAL_API_URL = "https://feature-8-api.yakeey.com/api/v1/backchannels/public/prompt"  # URL de l'API externe
