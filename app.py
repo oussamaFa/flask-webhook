@@ -12,6 +12,8 @@ ACCESS_TOKEN = "EAAIo3XDKfEMBO8h0z3g7Uy9d8oLhZAZBnPS9LD52QxfrAaPSu6Nf6Ntva4mT6AS
 PHONE_NUMBER_ID = "560506420481398"  # ID de ton numéro WhatsApp Business
 WHATSAPP_API_URL = f"https://graph.facebook.com/v17.0/{PHONE_NUMBER_ID}/messages"
 
+EXTERNAL_API_URL = "https://feature-8-api.yakeey.com/api/v1/backchannels/public/prompt"  # URL de l'API externe
+
 def send_whatsapp_message(recipient_id, message):
     """
     Envoie un message à un utilisateur via l'API WhatsApp Business
@@ -36,6 +38,29 @@ def send_whatsapp_message(recipient_id, message):
         print(f"Message envoyé avec succès à {recipient_id}")
     else:
         print(f"Erreur lors de l'envoi : {response.json()}")
+
+def call_external_api(message_text):
+    """
+    Appelle l'API externe en envoyant le message reçu sur WhatsApp et retourne la réponse.
+    """
+    headers = {
+        "Content-Type": "application/json"
+    }
+    
+    data = {
+        "prompt": message_text
+    }
+    
+    try:
+        response = requests.post(EXTERNAL_API_URL, json=data, headers=headers)
+        response_data = response.json()
+        
+        # Extraire la réponse si elle existe
+        return response_data.get("response", "Aucune réponse reçue de l'API.")
+    
+    except Exception as e:
+        print(f"Erreur lors de l'appel à l'API externe: {e}")
+        return "Une erreur est survenue lors de la communication avec notre service."
 
 @app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
@@ -64,8 +89,11 @@ def webhook():
 
                                 print(f"New message from {sender_id}: {message_text}")
 
-                                # Envoyer automatiquement une réponse avec le lien marketplace
-                                send_whatsapp_message(sender_id, "🔗 Découvrez notre marketplace ici : https://marketplace.com")
+                                # Appeler l'API externe avec le message reçu
+                                api_response = call_external_api(message_text)
+
+                                # Envoyer la réponse obtenue sur WhatsApp
+                                send_whatsapp_message(sender_id, api_response)
 
         return jsonify({"status": "success"}), 200
 
