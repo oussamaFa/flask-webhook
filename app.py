@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-VERIFY_TOKEN = "ghp_CTnXUKSDvBE8Ox74ksjRuTtsaO65Oy46p9000"
+VERIFY_TOKEN = "your_verify_token"
 
 @app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
